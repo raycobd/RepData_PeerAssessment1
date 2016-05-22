@@ -154,14 +154,22 @@ activity_weekend[, weekend := if ( isWeekend(date) ) "WEEKEND" else "WEEKDAY", b
 
 
 ```r
+activity_weekend_avg <-activity_weekend[,list(totalSteps=sum(steps)),mean.(inte, na.rm=TRUErval, weekend)]
+```
+
+```
+## Error in eval(expr, envir, enclos): could not find function "mean."
+```
+
+```r
 library("lattice")
-xyplot(steps ~ interval | factor(weekend),
+xyplot(totalSteps ~ interval | factor(weekend),
        layout = c(1, 2),
        xlab="Interval",
        ylab="Number of steps",
        type="l",
        lty=1,
-       data=activity_weekend)
+       data=activity_weekend_avg)
 ```
 
 ![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png)

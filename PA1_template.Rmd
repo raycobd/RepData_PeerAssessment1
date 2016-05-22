@@ -126,14 +126,17 @@ activity_weekend[, weekend := if ( isWeekend(date) ) "WEEKEND" else "WEEKDAY", b
 ### 2.Make a panel plot containing a time series plot (i.e. 𝚝𝚢𝚙𝚎 = "𝚕") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
 
 ```{r }
+
+activity_weekend_avg <-activity_weekend[,list(totalSteps=sum(steps)),mean.(inte, na.rm=TRUErval, weekend)]
+
 library("lattice")
-xyplot(steps ~ interval | factor(weekend),
+xyplot(totalSteps ~ interval | factor(weekend),
        layout = c(1, 2),
        xlab="Interval",
        ylab="Number of steps",
        type="l",
        lty=1,
-       data=activity_weekend)
+       data=activity_weekend_avg)
 ```
 
 
